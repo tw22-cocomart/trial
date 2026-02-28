@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cocomart — Sign Up</title>
+
+<style>
+html,body{height:100%;margin:0}
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:system-ui;
+}
+.container{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  width:100%;
+  max-width:380px;
+  padding:20px;
+}
+form{
+  display:grid;
+  gap:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>cocomart</h1>
+  <p>Create your account</p>
+
+  <!-- form submits directly to profile.html -->
+  <form action="profile.html" method="post">
+    <input name="name" type="text" placeholder="Full Name" required>
+    <input name="address" type="text" placeholder="Address" required>
+    <input name="contact" type="text" placeholder="Contact Number" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <p>Already registered? <a href="login.html">Login</a></p>
+</div>
+
+</body>
+</html>
