@@ -1,68 +1,127 @@
 <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>cocomart — Profile</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CocoMart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html"
+          ><img class="logo" src="images/cocomart-logo.png"
+        /></a>
+        <a><h2>CocoMart</h2></a>
+      </div>
 
-<style>
-html,body{height:100%;margin:0}
-body{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:system-ui;
-}
-.container{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  width:100%;
-  max-width:420px;
-  padding:20px;
-}
-.card{
-  display:grid;
-  gap:8px;
-}
-.row{
-  display:flex;
-  justify-content:space-between;
-}
-.note{color:#666;font-size:0.95rem}
-</style>
-</head>
+      <div class="nav-center">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
 
-<body>
+      <div class="nav-right">
+        <ul>
+          <li>
+            <a href="cart.html"
+              ><img class="icon cart" src="images/icon-cart.png"
+            /></a>
+          </li>
+          <li>
+            <a href="profile.html"
+              ><img class="icon cart" src="images/icon-profile.png"
+            /></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-<div class="container">
-  <h1>cocomart</h1>
-  <h2>Profile</h2>
+    <!-- MAIN -->
+    <main class="main">
+      <div class="prof-container">
+        <h1>cocomart</h1>
+        <h2>Profile</h2>
 
-  <div class="card">
-    <div class="row"><strong>Name:</strong><span id="name"></span></div>
-    <div class="row"><strong>Address:</strong><span id="address"></span></div>
-    <div class="row"><strong>Contact:</strong><span id="contact"></span></div>
-    <div class="row"><strong>Email:</strong><span id="email"></span></div>
-  </div>
+        <div class="card">
+          <div class="row"><strong>Name:</strong><span id="name"></span></div>
+          <div class="row">
+            <strong>Address:</strong><span id="address"></span>
+          </div>
+          <div class="row">
+            <strong>Contact:</strong><span id="contact"></span>
+          </div>
+          <div class="row"><strong>Email:</strong><span id="email"></span></div>
+        </div>
 
-  <a href="login.html">Log out</a>
-  <p class="note">If you arrived here directly the fields may show "Not provided".</p>
-</div>
+        <a href="login.html">Log out</a>
+      </div>
+    </main>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="fupper">
+          <img class="f-logo" src="images/cocomart-logo.png" />
+          <h2>CocoMart</h2>
+        </div>
+        <ul class="flower">
+          <li>All rights reserved</li>
+          <li>Terms of Service</li>
+          <li>Privacy Policy</li>
+        </ul>
+      </div>
 
-  function showOrDefault(key){
-    const v = params.get(key);
-    return v ? decodeURIComponent(v) : "Not provided";
-  }
+      <div class="footer-center">
+        <ul class="footer-upper">
+          <h2>Contact Us</h2>
+          <li>Number</li>
+          <li>Email</li>
+        </ul>
+        <div class="icon-socials">
+          <br />
+          <a href="#"
+            ><img class="icon icon-socials" src="images/icon-fb.png"
+          /></a>
+          <a href="#"
+            ><img class="icon icon-socials" src="images/icon-insta.png"
+          /></a>
+          <a href="#"
+            ><img class="icon icon-socials" src="images/icon-twt.png"
+          /></a>
+        </div>
+      </div>
 
-  document.getElementById("name").textContent = showOrDefault("name");
-  document.getElementById("address").textContent = showOrDefault("address");
-  document.getElementById("contact").textContent = showOrDefault("contact");
-  document.getElementById("email").textContent = showOrDefault("email");
-</script>
+      <div class="footer-right disclaimer">
+        For educational purposes only, and no copyright infringement is
+        intended.
+      </div>
+    </footer>
 
-</body>
+    <!-- JS: CREATE SEPARATE FILE LATER-->
+    <script>
+      // This reads submitted form data
+      const data = new FormData(
+        document.forms[0] || document.createElement("form"),
+      );
+
+      const params = new URLSearchParams(window.location.search);
+
+      document.getElementById("name").textContent =
+        params.get("name") || "Not provided";
+      document.getElementById("address").textContent =
+        params.get("address") || "Not provided";
+      document.getElementById("contact").textContent =
+        params.get("contact") || "Not provided";
+      document.getElementById("email").textContent =
+        params.get("email") || "Not provided";
+    </script>
+  </body>
 </html>
