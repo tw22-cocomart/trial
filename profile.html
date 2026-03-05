@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cocomart — Profile</title>
+
+<style>
+html,body{height:100%;margin:0}
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:system-ui;
+}
+.container{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  width:100%;
+  max-width:420px;
+  padding:20px;
+}
+.card{
+  display:grid;
+  gap:8px;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+}
+.note{color:#666;font-size:0.95rem}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>cocomart</h1>
+  <h2>Profile</h2>
+
+  <div class="card">
+    <div class="row"><strong>Name:</strong><span id="name"></span></div>
+    <div class="row"><strong>Address:</strong><span id="address"></span></div>
+    <div class="row"><strong>Contact:</strong><span id="contact"></span></div>
+    <div class="row"><strong>Email:</strong><span id="email"></span></div>
+  </div>
+
+  <a href="login.html">Log out</a>
+  <p class="note">If you arrived here directly the fields may show "Not provided".</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  function showOrDefault(key){
+    const v = params.get(key);
+    return v ? decodeURIComponent(v) : "Not provided";
+  }
+
+  document.getElementById("name").textContent = showOrDefault("name");
+  document.getElementById("address").textContent = showOrDefault("address");
+  document.getElementById("contact").textContent = showOrDefault("contact");
+  document.getElementById("email").textContent = showOrDefault("email");
+</script>
+
+</body>
+</html>
