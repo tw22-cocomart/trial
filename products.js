@@ -50,7 +50,7 @@
     return article;
   }
 
-  // --- RENDERER (Puts the items on the page) ---
+  // --- (Puts the items on the page) ---
   async function loadSectionAjax(containerId, tag, sortKey, limit) {
     const container = document.getElementById(containerId);
     if (!container) return;
