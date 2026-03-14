@@ -1,50 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Coco Cart</title>
-</head>
-<body style="font-family: Arial; background-color: #f9f9f9; padding: 20px;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CocoMart - Shopping Cart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html"><img class="logo" src="cocomart-logo.png" alt="logo" /></a>
+        <a><h2>CocoMart</h2></a>
+      </div>
+      <div class="nav-center">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <ul>
+          <li><a href="cart.html"><img class="icon cart-active" src="icon-cart-line.png" alt="cart" /></a></li>
+          <li><a href="profile.html"><img class="icon profile" src="icon-profile-line.png" alt="profile" /></a></li>
+        </ul>
+      </div>
+    </nav>
 
-    <div style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px;">
-        <h1 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">🛒 Shopping Cart</h1>
+    <main class="main">
+      <h1 class="h-cart">Shopping Cart</h1>
+      <hr />
 
-        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee;">
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <img src="" alt="Item" style="border-radius: 8px;">
-                <div>
-                    <h3 style="margin: 0;">Coconut nut</h3>
-                    <p style="color: gray; margin: 5px 0;">Food yummm</p>
-                </div>
-            </div>
-            <div style="text-align: right;">
-                <span style="font-weight: bold; font-size: 1.2em;">₱45.00</span><br>
-                <button onclick="alert('Removed')" style="color: red; background: none; border: none; cursor: pointer;">Remove</button>
-            </div>
+      <div class="cart-content">
+        <div class="cart-title">
+          <h3 class="cart-prod">Product</h3>
+          <div class="cart-text">
+            <h3>Details</h3>
+            <h3>Quantity</h3>
+            <h3>Price</h3>
+            <h3></h3>
+          </div>
         </div>
 
-        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee;">
-            <div style="display: flex; align-items: center; gap: 20px;">
-                <img src="" alt="Item" style="border-radius: 8px;">
-                <div>
-                    <h3 style="margin: 0;">Coco Martin</h3>
-                    <p style="color: gray; margin: 5px 0;">Love, Joy, Hope</p>
-                </div>
+        <div class="cart-item act">
+          <img class="cart-img" src="product-01.jpg" alt="Coco Peat Block" />
+          <div class="cart-deets">
+            <div class="c-text">
+              <h3>Coco Peat Block</h3>
+              <p>Organic soil amendment.</p>
             </div>
-            <div style="text-align: right;">
-                <span style="font-weight: bold; font-size: 1.2em;">₱120.00</span><br>
-                <button onclick="alert('Removed')" style="color: red; background: none; border: none; cursor: pointer;">Remove</button>
-            </div>
+            <span>1</span>
+            <span>₱35.00</span>
+            <button>x</button>
+          </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; margin-top: 30px;">
-            <div style="text-align: right;">
-                <p style="font-size: 1.5em; margin: 0;">Total: <b>₱165.00</b></p>
-                <br>
-                <a href="checkout.html" style="background: black; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px;">Proceed to Checkout →</a>
+        <div class="cart-item act">
+          <img class="cart-img" src="product-07.png" alt="Tree Mulch Mat" />
+          <div class="cart-deets">
+            <div class="c-text">
+              <h3>Tree Mulch Mat</h3>
+              <p>Erosion and weed control.</p>
             </div>
+            <span>2</span>
+            <span>₱60.00</span>
+            <button>x</button>
+          </div>
         </div>
-    </div>
 
-</body>
+        <div class="cart-item act">
+          <img class="cart-img" src="product-06.jpg" alt="Fiber Scrub Brush" />
+          <div class="cart-deets">
+            <div class="c-text">
+              <h3>Fiber Scrub Brush</h3>
+              <p>Natural kitchen cleaning.</p>
+            </div>
+            <span>1</span>
+            <span>₱45.00</span>
+            <button>x</button>
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <div class="cart-summary">
+        <p><b>Item SubTotal</b>: ₱140.00</p>
+        <p><b>Shipping Fee</b>: ₱30.00</p>
+        <p><b>Total</b>: ₱170.00</p>
+        <a class="cart-button" href="checkout.html">Proceed to Checkout</a>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="fupper">
+          <img
+            class="f-logo"
+            src="cocomart-logo.png"
+            alt="Cocomart Logo"
+          />
+          <h2>CocoMart</h2>
+        </div>
+        <ul class="flower">
+          <li>All rights reserved</li>
+          <li>Terms of Service</li>
+          <li>Privacy Policy</li>
+        </ul>
+      </div>
+
+      <div class="footer-center">
+        <ul class="footer-upper">
+          <h2>Contact Us</h2>
+          <li>+631234567890</li>
+          <li>cocomart.tw22@gmail.com</li>
+        </ul>
+        <div class="icon-socials">
+          <br />
+          <a href="#"
+            ><img
+              class="icon icon-socials"
+              src="icon-fb.png"
+              alt="Facebook icon"
+          /></a>
+          <a href="#"
+            ><img
+              class="icon icon-socials"
+              src="icon-insta.png"
+              alt="Instagram icon"
+          /></a>
+          <a href="#"
+            ><img
+              class="icon icon-socials"
+              src="icon-twt.png"
+              alt="Twitter icon"
+          /></a>
+        </div>
+      </div>
+
+      <div class="footer-right disclaimer">
+        For educational purposes only, and no copyright infringement is
+        intended.
+      </div>
+    </footer>
+  </body>
 </html>

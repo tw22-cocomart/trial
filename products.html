@@ -6,17 +6,23 @@
 </head>
 <body>
 
+  <!-- Navbar: links change depending on login status -->
+  <nav id="nav" aria-label="Main navigation" style="display:flex;justify-content:flex-end;gap:12px;padding:12px 20px;background:#f3f3f3;"></nav>
+
     <main>
+        <!-- Header for product listing -->
         <header>
             <h1 align="center">Premium Coir Collection</h1>
             <p align="center">Eco-friendly solutions for your garden, home, and industrial needs.</p>
         </header>
 
+        <!-- Product grid: each <article> is one product -->
         <section id="product-grid">
             <table width="95%" align="center" border="0" cellpadding="15">
                 <tr>
                     <td align="center" valign="top" width="25%">
                         <article>
+                            <!-- product image and details -->
                             <img src="https://i.pinimg.com/736x/55/f4/77/55f477daed3dd43ff8f2e1696166f6e5.jpg" 
                             alt="Coco Peat Block" width="180" height="180">
                             <h3>Coco Peat Block</h3>
@@ -91,5 +97,22 @@
             </table>
         </section>
     </main>
+
+<!-- Navbar script: shows different links based on whether user is signed in -->
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const stored = localStorage.getItem('cocomart_user');
+  if (stored){
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="cart.html">Cart</a> <a href="profile.html">Profile</a> <a href="#" id="navLogout">Log out</a>';
+    const btn = document.getElementById('navLogout');
+    if (btn) btn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('cocomart_user'); window.location.href='login.html'; });
+  } else {
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="login.html">Login</a> <a href="signup.html">Sign Up</a>';
+  }
+})();
+</script>
+
 </body>
 </html>

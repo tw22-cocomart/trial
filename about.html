@@ -6,7 +6,11 @@
 </head>
 <body>
 
+  <!-- Navbar: links change depending on login status -->
+  <nav id="nav" aria-label="Main navigation" style="display:flex;justify-content:flex-end;gap:12px;padding:12px 20px;background:#f3f3f3;"></nav>
+
     <main>
+        <!-- Page header: title and intro text -->
         <article>
             <header align="center">
                 <h1>About Us</h1>
@@ -16,6 +20,7 @@
             </header>
         </article>
 
+        <!-- Section showing what we specialize in -->
         <section>
             <h2 align="center">Our Specialities</h2>
             
@@ -43,6 +48,22 @@
             </table>
         </section>
     </main>
-    
+
+<!-- Navbar script: shows different links based on whether user is signed in -->
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const stored = localStorage.getItem('cocomart_user');
+  if (stored){
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="cart.html">Cart</a> <a href="profile.html">Profile</a> <a href="#" id="navLogout">Log out</a>';
+    const btn = document.getElementById('navLogout');
+    if (btn) btn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('cocomart_user'); window.location.href='login.html'; });
+  } else {
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="login.html">Login</a> <a href="signup.html">Sign Up</a>';
+  }
+})();
+</script>
+
 </body>
 </html>

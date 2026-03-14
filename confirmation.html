@@ -6,6 +6,10 @@
 </head>
 <body style="font-family: Arial; height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; background-color: #e8f5e9;">
 
+  <!-- Navbar: links change depending on login status -->
+  <nav id="nav" aria-label="Main navigation" style="position:fixed;top:0;right:0;left:0;display:flex;justify-content:flex-end;gap:12px;padding:12px 20px;background:#f3f3f3;"></nav>
+
+    <!-- Simple success page after order -->
     <div style="text-align: center; background: white; padding: 50px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
         <img src="https://cdn-icons-png.flaticon.com/512/5290/5290058.png" alt="Success" width="100" style="margin-bottom: 20px;">
         
@@ -13,11 +17,28 @@
         <p style="font-size: 1.2em; color: #555;">Thanks for shopping with us, Laica!</p>
         <p style="color: #888;">Order ID: #ABC-123456789</p>
 
+        <!-- quick links after order -->
         <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 10px;">
             <a href="#" style="color: #2e7d32; text-decoration: none; font-weight: bold;">View Transaction History</a>
             <a href="products.html" style="display: inline-block; background: #333; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; margin-top: 10px;">Back to Products</a>
         </div>
     </div>
+
+<!-- Navbar script: shows different links based on whether user is signed in -->
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const stored = localStorage.getItem('cocomart_user');
+  if (stored){
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="cart.html">Cart</a> <a href="profile.html">Profile</a> <a href="#" id="navLogout">Log out</a>';
+    const btn = document.getElementById('navLogout');
+    if (btn) btn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('cocomart_user'); window.location.href='login.html'; });
+  } else {
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="login.html">Login</a> <a href="signup.html">Sign Up</a>';
+  }
+})();
+</script>
 
 </body>
 </html>
