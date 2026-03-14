@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Coco Cart</title>
+</head>
+<body style="font-family: Arial; background-color: #f9f9f9; padding: 20px;">
+
+  <!-- Navbar: links change depending on login status -->
+  <nav id="nav" aria-label="Main navigation" style="display:flex;justify-content:flex-end;gap:12px;padding:12px 20px;background:#f3f3f3;"></nav>
+
+    <!-- Card: main shopping cart container -->
+    <div style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 15px;">
+        <h1 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">🛒 Shopping Cart</h1>
+
+        <!-- Cart item 1 -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <!-- product image -->
+                <img src="" alt="Item" style="border-radius: 8px;">
+                <div>
+                    <h3 style="margin: 0;">Coconut nut</h3>
+                    <p style="color: gray; margin: 5px 0;">Food yummm</p>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span style="font-weight: bold; font-size: 1.2em;">₱45.00</span><br>
+                <!-- Remove button: removes item from cart (placeholder behavior) -->
+                <button onclick="alert('Removed')" style="color: red; background: none; border: none; cursor: pointer;">Remove</button>
+            </div>
+        </div>
+
+        <!-- Cart item 2 -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee;">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <img src="" alt="Item" style="border-radius: 8px;">
+                <div>
+                    <h3 style="margin: 0;">Coco Martin</h3>
+                    <p style="color: gray; margin: 5px 0;">Love, Joy, Hope</p>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <span style="font-weight: bold; font-size: 1.2em;">₱120.00</span><br>
+                <!-- Remove button: removes item from cart (placeholder behavior) -->
+                <button onclick="alert('Removed')" style="color: red; background: none; border: none; cursor: pointer;">Remove</button>
+            </div>
+        </div>
+
+        <!-- Total and checkout -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 30px;">
+            <div style="text-align: right;">
+                <p style="font-size: 1.5em; margin: 0;">Total: <b>₱165.00</b></p>
+                <br>
+                <!-- Go to checkout page -->
+                <a href="checkout.html" style="background: black; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px;">Proceed to Checkout →</a>
+            </div>
+        </div>
+    </div>
+
+<!-- Navbar script: shows different links based on whether user is signed in -->
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const stored = localStorage.getItem('cocomart_user');
+  if (stored){
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="cart.html">Cart</a> <a href="profile.html">Profile</a> <a href="#" id="navLogout">Log out</a>';
+    const btn = document.getElementById('navLogout');
+    if (btn) btn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('cocomart_user'); window.location.href='login.html'; });
+  } else {
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="login.html">Login</a> <a href="signup.html">Sign Up</a>';
+  }
+})();
+</script>
+
+</body>
+</html>

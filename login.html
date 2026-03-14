@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cocomart — Login</title>
+
+<style>
+html,body{height:100%;margin:0}
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:system-ui;
+}
+.container{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  width:100%;
+  max-width:380px;
+  padding:20px;
+}
+form{
+  display:grid;
+  gap:10px;
+}
+input.invalid{outline:2px solid #e74c3c}
+.error{color:#e74c3c;font-size:0.9rem;margin-top:-6px;margin-bottom:6px}
+button{cursor:pointer}
+
+/* nav styling */
+nav{display:flex;justify-content:flex-end;gap:10px;margin-bottom:6px}
+nav a{color:inherit;text-decoration:none;font-weight:500}
+</style>
+</head>
+
+<body>
+
+  <!-- Navbar: links change depending on login status -->
+  <nav id="nav" aria-label="Main navigation" style="padding:8px 12px;"></nav>
+
+<div class="container">
+  <h1>cocomart</h1>
+  <p>Welcome back</p>
+
+  <form id="loginForm" novalidate>
+    <input id="loginEmail" name="email" type="email" placeholder="Email" required>
+    <div id="loginEmailError" class="error" aria-live="polite"></div>
+
+    <input id="loginPassword" name="password" type="password" placeholder="Password" required>
+    <div id="loginPasswordError" class="error" aria-live="polite"></div>
+
+    <button type="submit">Log In</button>
+  </form>
+
+  <p>No account yet? <a href="signup.html">Create one</a></p>
+</div>
+
+<script>
+(function(){
+  const form = document.getElementById('loginForm');
+  const email = document.getElementById('loginEmail');
+  const password = document.getElementById('loginPassword');
+  const emailErr = document.getElementById('loginEmailError');
+  const passErr = document.getElementById('loginPasswordError');
+
+  // show red outline and error message
+  function showError(el, msgEl, msg){
+    el.classList.add('invalid');
+    msgEl.textContent = msg;
+  }
+
+  // remove error message when user edits the input
+  function clearError(el, msgEl){
+    el.classList.remove('invalid');
+    msgEl.textContent = '';
+  }
+
+  // simple check to see if the email looks valid
+  function validEmail(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  email.addEventListener('input', ()=> clearError(email, emailErr));
+  password.addEventListener('input', ()=> clearError(password, passErr));
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    let ok = true;
+    if (!email.value.trim()){
+      showError(email, emailErr, 'Email is required.');
+      ok = false;
+    } else if (!validEmail(email.value.trim())){
+      showError(email, emailErr, 'Please enter a valid email.');
+      ok = false;
+    }
+
+    if (!password.value){
+      showError(password, passErr, 'Password is required.');
+      ok = false;
+    }
+
+    if (!ok) return;
+
+    // In a real app you'd check the password on the server.
+    // Here we mark the user as "signed in" on this browser.
+    const existing = JSON.parse(localStorage.getItem('cocomart_user') || '{}');
+
+    // keep any saved profile info if the emails match
+    if (existing.email && existing.email === email.value.trim()){
+      localStorage.setItem('cocomart_user', JSON.stringify(existing));
+    } else {
+      // save the user email so the site knows someone is logged in
+      localStorage.setItem('cocomart_user', JSON.stringify({ email: email.value.trim() }));
+    }
+
+    const params = new URLSearchParams({
+      email: email.value.trim()
+    }).toString();
+
+    window.location.href = 'profile.html?' + params;
+  });
+})();
+</script>
+
+<!-- Navbar script: shows different links based on whether user is signed in -->
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const stored = localStorage.getItem('cocomart_user');
+  if (stored){
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="cart.html">Cart</a> <a href="profile.html">Profile</a> <a href="#" id="navLogout">Log out</a>';
+    const btn = document.getElementById('navLogout');
+    if (btn) btn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('cocomart_user'); window.location.href='login.html'; });
+  } else {
+    nav.innerHTML = '<a href="products.html">Products</a> <a href="login.html">Login</a> <a href="signup.html">Sign Up</a>';
+  }
+})();
+</script>
+
+</body>
+</html>
