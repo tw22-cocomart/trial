@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CocoMart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html"
+          ><img class="logo" src="images/cocomart-logo.png" alt="cocomart-logo"
+        /></a>
+        <a><h2>CocoMart</h2></a>
+      </div>
+
+      <div class="nav-center">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <!-- add id so JS can update navbar depending on sign-in state -->
+        <ul id="nav-right-list">
+          <li>
+            <a href="cart.html"
+              ><img
+                class="icon cart cart"
+                src="images/icon-cart-line.png"
+                alt="cart"
+            /></a>
+          </li>
+          <li>
+            <!-- when not signed in, profile icon leads to login -->
+            <a href="profile.html"
+              ><img
+                class="icon profile profile"
+                src="images/icon-profile-line.png"
+                alt="profile"
+            /></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="sign-container">
+        <p>Create your account</p>
+
+        <!-- form submits directly to profile.html -->
+        <form id="signup-form" action="profile.html" method="post">
+          <input name="name" type="text" placeholder="Full Name" required />
+          <input name="address" type="text" placeholder="Address" required />
+          <input
+            name="contact"
+            type="text"
+            placeholder="Contact Number"
+            required
+          />
+          <input name="email" type="email" placeholder="Email" required />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+
+        <p>Already registered? <a href="login.html">Login</a></p>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="fupper">
+          <img
+            class="f-logo"
+            src="images/cocomart-logo.png"
+            alt="Cocomart Logo"
+          />
+          <h2>CocoMart</h2>
+        </div>
+        <ul class="flower">
+          <li>All rights reserved</li>
+          <li>Terms of Service</li>
+          <li>Privacy Policy</li>
+        </ul>
+      </div>
+
+      <div class="footer-center">
+        <ul class="footer-upper">
+          <h2>Contact Us</h2>
+          <li>+631234567890</li>
+          <li>cocomart.tw22@gmail.com</li>
+        </ul>
+        <div class="icon-socials">
+          <br />
+          <a href="#"
+            ><img
+              class="icon icon-socials"
+              src="images/icon-fb.png"
+              alt="Facebook icon"
+          /></a>
+          <a href="#"
+            ><img
+              class="icon icon-socials"
+              src="images/icon-insta.png"
+              alt="Instagram icon"
+          /></a>
+          <a href="#"
+            ><img
+              class="icon icon-socials"
+              src="images/icon-twt.png"
+              alt="Twitter icon"
+          /></a>
+        </div>
+      </div>
+
+      <div class="footer-right disclaimer">
+        For educational purposes only, and no copyright infringement is
+        intended.
+      </div>
+    </footer>
+
+    <!-- NAVBAR + FORM BEHAVIOR SCRIPT -->
+    <script>
+      // Simple helper to update the right side of the navbar
+      function updateNavbar() {
+        const navList = document.getElementById("nav-right-list");
+        // If there's a saved user, show profile as active and show logout
+        const userJson = localStorage.getItem("cocomartUser");
+        if (userJson) {
+          const user = JSON.parse(userJson);
+          navList.innerHTML = `
+            <li>
+              <a href="cart.html"><img class="icon cart" src="images/icon-cart-line.png" alt="cart" /></a>
+            </li>
+            <li>
+              <!-- active profile icon links to profile page -->
+              <a href="profile.html"><img class="icon profile profile-active" src="images/icon-profile-line.png" alt="profile" /></a>
+            </li>
+            <li>
+              <!-- small logout link in navbar -->
+              <a id="nav-logout" href="#">Log out</a>
+            </li>
+          `;
+          // attach logout behavior
+          document.getElementById("nav-logout").addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("cocomartUser");
+            // after logout, go to home
+            window.location.href = "index.html";
+          });
+        } else {
+          // not signed in: profile links to login, show sign up shortcut
+          navList.innerHTML = `
+            <li>
+              <a href="cart.html"><img class="icon cart" src="images/icon-cart-line.png" alt="cart" /></a>
+            </li>
+            <li>
+              <a href="login.html"><img class="icon profile" src="images/icon-profile-line.png" alt="profile" /></a>
+            </li>
+            <li>
+              <a href="signup.html">Sign Up</a>
+            </li>
+          `;
+        }
+      }
+
+      // call immediately so navbar matches state
+      updateNavbar();
+
+      // Store signup info in localStorage (simple client-side stub)
+      document.getElementById("signup-form").addEventListener("submit", function (e) {
+        // prevent actual form submission so we can save to localStorage
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const user = {
+          name: formData.get("name") || "Not provided",
+          address: formData.get("address") || "Not provided",
+          contact: formData.get("contact") || "Not provided",
+          email: formData.get("email") || "Not provided"
+          // we intentionally do not store password in this example
+        };
+        localStorage.setItem("cocomartUser", JSON.stringify(user));
+        // go to profile page (profile will read localStorage)
+        window.location.href = "profile.html";
+      });
+    </script>
+  </body>
+</html>
