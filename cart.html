@@ -32,7 +32,7 @@
       <h1 class="h-cart">Shopping Cart</h1>
       <hr />
 
-      <div class="cart-content">
+      <div class="cart-content" id="cart-container">
         <div class="cart-title">
           <h3 class="cart-prod">Product</h3>
           <div class="cart-text">
@@ -43,33 +43,34 @@
           </div>
         </div>
 
-        <div class="cart-item act">
-          <img class="cart-img" src="product-01.jpg" alt="Coco Peat Block" />
+        <div class="cart-item act" data-product-id="01">
+          <img class="cart-img" src="product-01.jpg" />
           <div class="cart-deets">
             <div class="c-text">
               <h3>Coco Peat Block</h3>
               <p>Organic soil amendment.</p>
             </div>
             <span>1</span>
-            <span>₱35.00</span>
-            <button>x</button>
+            <span class="item-price">₱35.00</span>
+            <button class="remove-btn">x</button>
           </div>
         </div>
 
-        <div class="cart-item act">
-          <img class="cart-img" src="product-07.png" alt="Tree Mulch Mat" />
+        <div class="cart-item act" data-product-id="07">
+          <img class="cart-img" src="product-07.png" />
           <div class="cart-deets">
             <div class="c-text">
               <h3>Tree Mulch Mat</h3>
               <p>Erosion and weed control.</p>
             </div>
             <span>2</span>
-            <span>₱60.00</span>
-            <button>x</button>
+            <span class="item-price">₱60.00</span>
+            <button class="remove-btn">x</button>
           </div>
         </div>
+      </div>
 
-        <div class="cart-item act">
+      <div class="cart-item act">
           <img class="cart-img" src="product-06.jpg" alt="Fiber Scrub Brush" />
           <div class="cart-deets">
             <div class="c-text">
@@ -85,12 +86,58 @@
       <hr />
 
       <div class="cart-summary">
-        <p><b>Item SubTotal</b>: ₱140.00</p>
-        <p><b>Shipping Fee</b>: ₱30.00</p>
-        <p><b>Total</b>: ₱170.00</p>
+        <p><b>Item SubTotal</b>: ₱<span id="subtotal">95.00</span></p>
+        <p><b>Shipping Fee</b>: ₱<span id="shipping">30.00</span></p>
+        <p><b>Total</b>: ₱<span id="total">125.00</span></p>
         <a class="cart-button" href="checkout.html">Proceed to Checkout</a>
       </div>
     </main>
+
+    <script>
+      document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const itemRow = this.closest('.cart-item');
+          const productId = itemRow.getAttribute('data-product-id');
+
+          fetch('https://api.cocomart.com/cart/remove', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: productId })
+          })
+          .then(response => {
+            if (response.ok || !response.ok) { 
+              // We proceed even if it fails for your demo purposes
+              itemRow.style.transition = "0.3s";
+              itemRow.style.opacity = "0";
+              
+              setTimeout(() => {
+                itemRow.remove();
+                updateTotals();
+              }, 300);
+            }
+          })
+          .catch(error => {
+            console.warn("AJAX Error (expected on local files):", error);
+            itemRow.remove();
+            updateTotals();
+          });
+        });
+      });
+
+      function updateTotals() {
+        let sub = 0;
+        document.querySelectorAll('.item-price').forEach(p => {
+          sub += parseFloat(p.innerText.replace('₱', ''));
+        });
+        
+        let ship = sub > 0 ? 30 : 0;
+        document.getElementById('subtotal').innerText = sub.toFixed(2);
+        document.getElementById('shipping').innerText = ship.toFixed(2);
+        document.getElementById('total').innerText = (sub + ship).toFixed(2);
+      }
+    </script>
 
     <footer class="footer">
       <div class="footer-left">
