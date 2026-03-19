@@ -29,16 +29,18 @@
       </div>
 
       <div class="nav-right">
-        <ul>
+        <!-- add id so JS can update navbar depending on sign-in state -->
+        <ul id="nav-right-list">
           <li>
             <a href="cart.html"
               ><img
-                class="icon cart cart"
+                class="icon cart cart-active"
                 src="images/icon-cart-line.png"
                 alt="cart"
             /></a>
           </li>
           <li>
+            <!-- when not signed in, profile icon leads to login -->
             <a href="profile.html"
               ><img
                 class="icon profile profile"
@@ -52,47 +54,62 @@
 
     <!-- MAIN -->
     <main class="main">
-      <div class="checkout">
-        <div class="checkout-title">
-          <h2>Secure Checkout</h2>
-          <p>Enter your shipping and payment details.</p>
+      <h1 class="h-cart">Transaction History</h1>
+      <hr />
+
+      <div class="cart-content">
+        <!-- TITLE BAR -->
+        <div class="cart-title">
+          <h3 class="cart-prod">Product</h3>
+          <div class="cart-text">
+            <h3></h3>
+            <h3>Quantity</h3>
+            <h3>Price</h3>
+            <h3></h3>
+          </div>
         </div>
 
-        <div class="checkout-form">
-          <form>
-            <div class="checkout-details">
-              <div class="checkout-name">
-                <label>First Name</label>
-                <input type="text" />
-              </div>
-              <div class="checkout-name">
-                <label>Last Name</label>
-                <input type="text" />
-              </div>
-
-              <div class="shipping">
-                <label>Shipping Address</label>
-                <textarea class="ship-add" rows="3"></textarea>
-              </div>
+        <!-- CART CONTENTS -->
+        <div class="cart-item">
+          <img class="cart-img" src="images/product-01.jpg" />
+          <div class="cart-deets">
+            <div class="c-text">
+              <h3>Coco Peat Block</h3>
+              <p>Organic soil amendment.</p>
             </div>
+            <span>1</span>
+            <span>₱35.00</span>
+            <button>x</button>
+          </div>
+        </div>
 
-            <h3 class="payment-method">Payment Method</h3>
-            <div class="pay">
-              <a class="pay-choices">GCash</a>
-              <a class="pay-choices">Maya</a>
-              <a class="pay-choices">COD</a>
+        <div class="cart-item">
+          <img class="cart-img" src="images/product-07.png" />
+          <div class="cart-deets">
+            <div class="c-text">
+              <h3>Tree Mulch Mat</h3>
+              <p>Erosion and weed control.</p>
             </div>
+            <span>3</span>
+            <span>₱90.00</span>
+            <button>x</button>
+          </div>
+        </div>
 
-            <button
-              class="order"
-              type="button"
-              onclick="window.location.href = 'confirmation.html'"
-            >
-              Confirm Order
-            </button>
-          </form>
+        <div class="cart-item">
+          <img class="cart-img" src="images/product-04.jpg" />
+          <div class="cart-deets">
+            <div class="c-text">
+              <h3>Basket Liners</h3>
+              <p>Natural floral displays.</p>
+            </div>
+            <span>2</span>
+            <span>₱170.00</span>
+            <button>x</button>
+          </div>
         </div>
       </div>
+      <hr />
     </main>
 
     <!-- FOOTER -->
@@ -147,5 +164,6 @@
         intended.
       </div>
     </footer>
+    <script src="navbar.js"></script>
   </body>
 </html>
